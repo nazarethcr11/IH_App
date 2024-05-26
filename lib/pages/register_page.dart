@@ -34,17 +34,17 @@ class _RegisterPageState extends State<RegisterPage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
-                color: Colors.lightBlue.shade900,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(height: 10),
-            const Padding(
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
                 'Regístrate para acceder a nuestras herramientas',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -53,7 +53,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //email textfield
             MyTextField(
                 controller: emailController,
-                hintText: 'Email',
+                hintText: 'Correo electrónico',
                 obscureText: false,
                 icon: Icons.email
             ),
@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //password textfield
             MyTextField(
                 controller: passwordController,
-                hintText: 'Password',
+                hintText: 'Contraseña',
                 obscureText: true,
                 icon: Icons.lock
             ),
@@ -69,7 +69,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //confirm password textfield
             MyTextField(
                 controller: confirmPasswordController,
-                hintText: 'Confirm Password',
+                hintText: 'Confirmar contraseña',
                 obscureText: true,
                 icon: Icons.lock
             ),
@@ -77,7 +77,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //register button
             MyButton(
                 onTap: () { },
-                text: 'Register'
+                text: 'Registrarse'
             ),
             const SizedBox(height: 20),
             Row(
@@ -86,7 +86,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 Text(
                   '¿Ya tienes una cuenta?',
                   style: TextStyle(
-                    color: Colors.grey.shade800,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     fontSize: 14,
                   ),
                 ),
@@ -97,7 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text(
                     ' Inicia sesión',
                     style: TextStyle(
-                      color: Colors.lightBlue.shade900,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),

@@ -32,17 +32,17 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 24,
-                color: Colors.lightBlue.shade900,
+                color: Theme.of(context).colorScheme.primary,
               ),
             ),
             const SizedBox(height: 10),
-            const Padding(
+            Padding(
               padding:  EdgeInsets.symmetric(horizontal: 30),
               child: Text(
                 'Ingresa a tu cuenta para  acceder a nuestras herramientas',
                 style: TextStyle(
                   fontSize: 14,
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.tertiary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   '¿No tienes cuenta?',
                   style: TextStyle(
-                    color: Colors.grey.shade800,
+                    color: Theme.of(context).colorScheme.inversePrimary,
                     fontSize: 14,
                   ),
                 ),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     ' Registrate',
                     style: TextStyle(
-                      color: Colors.lightBlue.shade900,
+                      color: Theme.of(context).colorScheme.primary,
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),

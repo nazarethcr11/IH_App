@@ -21,23 +21,23 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          prefixIcon: Icon(icon , color: Colors.lightBlue.shade900,),
+          prefixIcon: Icon(icon , color: Theme.of(context).colorScheme.primary,),
           enabledBorder: OutlineInputBorder(
             borderSide: BorderSide(
-              color:  Colors.grey.shade600,
+              color:  Theme.of(context).colorScheme.tertiary,
             ),
             borderRadius: BorderRadius.circular(25),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
               width: 2.0,
-              color:  Colors.lightBlue.shade900,
+              color:  Theme.of(context).colorScheme.primary,
             ),
             borderRadius: BorderRadius.circular(25),
           ),
           hintText: hintText,
           hintStyle: TextStyle(
-            color: Colors.grey.shade600,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
         ),
         obscureText: obscureText,

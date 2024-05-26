@@ -23,17 +23,17 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow.shade700,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: _pages[_selectedIndex],
       bottomNavigationBar: Container(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.surface,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: GNav(
-            backgroundColor: Colors.white,
-            activeColor: Colors.grey.shade800,
-            color: Colors.grey.shade600,
-            tabBackgroundColor: Colors.yellow.shade700,
+            backgroundColor:Theme.of(context).colorScheme.surface,
+            activeColor: Theme.of(context).colorScheme.inversePrimary,
+            color: Theme.of(context).colorScheme.tertiary,
+            tabBackgroundColor: Theme.of(context).colorScheme.secondary,
             padding: const EdgeInsets.all(15),
             gap: 8,
             tabs: [
