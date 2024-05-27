@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   final List<Widget> _pages = [
-    Center(child:Text('Home Page')),
+    HomePageInside(),
     CameraToolPage(),
     NotificationPage(),
     ProfilePage(),
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             tabBackgroundColor: Theme.of(context).colorScheme.secondary,
             padding: const EdgeInsets.all(15),
             gap: 8,
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home,
                 text: 'Home',
@@ -66,3 +66,15 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+class HomePageInside extends StatelessWidget {
+  const HomePageInside({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('Home Page'),
+    );
+  }
+}
+
