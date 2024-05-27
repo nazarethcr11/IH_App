@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # inclusive_hue
 
 A new Flutter project.
@@ -15,7 +14,9 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
-=======
+
 # IH_App
 Curso: TP1
->>>>>>> 4fafa8034bf864e0db6e20b292bbc597ab852a8c
+
+# Figma Desing (Possible Changes)
+https://www.figma.com/design/LXRq2fXDLYf5X1227hkhtQ/Inclusive-Hue-Desing?node-id=0-1&t=9tPTDhzPR486LheO-1
