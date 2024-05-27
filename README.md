@@ -1,6 +1,6 @@
-# inclusive_hue
-
-A new Flutter project.
+# Inclusive Hue App
+A new Flutter project, Thesis research.
+A mobile Application for colorblind user.
 
 ## Getting Started
 
