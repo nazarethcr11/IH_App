@@ -29,12 +29,12 @@ class NotificationPage extends StatelessWidget {
             ),
             _buildNotificationContainer(
               context,
-              'Mensaje 2',
+              'Usted lleva ejecutando la apliación por mas de 1 hora',
               'lib/images/logotype/logo.png', // Ruta de la imagen
             ),
             _buildNotificationContainer(
               context,
-              'Mensaje 3',
+              'Encendiste la aplcación. Esta se ejecutará en segundo plano ',
               'lib/images/logotype/logo.png', // Ruta de la imagen
             ),
             // Agrega más mensajes según sea necesario
