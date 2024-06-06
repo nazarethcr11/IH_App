@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:inclusive_hue/components/my_slider.dart';
+import 'package:inclusive_hue/components/my_toggle_button.dart';
 import 'package:inclusive_hue/pages/camera_tool_page.dart';
 import 'package:inclusive_hue/pages/notification_page.dart';
 import 'package:inclusive_hue/pages/profile_page.dart';
@@ -72,8 +74,47 @@ class HomePageInside extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Page'),
+    return Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          MyToggleButton(
+            leftLabel: 'Apagado',
+            rightLabel: 'Encendido',
+            isToggled: false,
+          ),
+          SizedBox(height: 20),
+          MySlider(initialValue: 21, title: 'Ajuste de color'),
+          SizedBox(height: 20),
+          MySlider(initialValue: 50, title: 'Intensidad de luz'),
+          //preview image
+          SizedBox(height: 20),
+          // agregar lib/images/default/preview.jpg
+          Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              image: const DecorationImage(
+                image: AssetImage('lib/images/default/preview.jpg'),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          //icon and text preview image
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.remove_red_eye_outlined, color: Theme.of(context).colorScheme.primary),
+              SizedBox(width: 5),
+              Text('Vista previa'),
+            ],
+          ),
+
+        ],
+      ),
     );
   }
 }

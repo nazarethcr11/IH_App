@@ -4,7 +4,6 @@ class MyListTile extends StatelessWidget {
   final IconData icon_leading;
   final String title;
   final void Function() onTap;
-  final IconData icon_trailing;
   final Color iconColor;
 
   const MyListTile({
@@ -12,7 +11,6 @@ class MyListTile extends StatelessWidget {
     required this.icon_leading,
     required this.title,
     required this.onTap,
-    required this.icon_trailing,
     required this.iconColor,
   });
 
@@ -28,7 +26,7 @@ class MyListTile extends StatelessWidget {
           child: ListTile(
             leading: Icon(icon_leading, color: iconColor),
             title: Text(title),
-            trailing: Icon(icon_trailing, color: Theme.of(context).colorScheme.tertiary),
+            trailing: Icon(Icons.arrow_forward_ios, color: Theme.of(context).colorScheme.tertiary),
             onTap: onTap,
           ),
         ),

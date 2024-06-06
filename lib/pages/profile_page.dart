@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_list_tile.dart';
+import 'package:inclusive_hue/pages/change_colorblindtype_page.dart';
+import 'package:inclusive_hue/pages/theme_page.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class ProfilePage extends StatelessWidget {
                     CircleAvatar(
                       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
                       radius: 50,
-                      backgroundImage: AssetImage('assets/profile.jpg'), // Reemplaza con la ruta de tu imagen
+                      backgroundImage: AssetImage('lib/images/default/profile.webp'), // Reemplaza con la ruta de tu imagen
                       child: Align(
                         alignment: Alignment.bottomRight,
                         child: GestureDetector(
@@ -73,36 +75,38 @@ class ProfilePage extends StatelessWidget {
             MyListTile(
                 icon_leading: Icons.edit,
                 title: 'Editar Perfil',
-                onTap: (){},
-                icon_trailing: Icons.arrow_forward_ios,
+                onTap: (){
+                 Navigator.push(context,MaterialPageRoute(builder:(context)=> ThemePage(),));
+                },
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
             MyListTile(
                 icon_leading: Icons.colorize,
                 title: 'Cambiar Daltonismo',
-                onTap: (){},
-                icon_trailing: Icons.arrow_forward_ios,
+                onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder:(context)=> ChangeColorblindtypePage(),));
+                },
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
             MyListTile(
                 icon_leading: Icons.palette,
                 title: 'Temas',
-                onTap: (){},
-                icon_trailing: Icons.arrow_forward_ios,
+                onTap: ()=> Navigator.push(context,MaterialPageRoute(builder:(context)=> ThemePage(),)),
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
             MyListTile(
-                icon_leading: Icons.info,
-                title: 'Acerca de',
+                icon_leading: Icons.subscriptions,
+                title: 'Planes',
                 onTap: (){},
-                icon_trailing: Icons.arrow_forward_ios,
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
             MyListTile(
                 icon_leading: Icons.logout,
                 title: 'Cerrar Sesión',
-                onTap: (){},
-                icon_trailing: Icons.arrow_forward_ios,
+                onTap: (){
+                  //por ahora solo cierra la página
+                  Navigator.pop(context);
+                },
                 iconColor: Colors.red,
             ),
           ],
