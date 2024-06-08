@@ -5,6 +5,8 @@ import 'package:inclusive_hue/components/my_toggle_button.dart';
 import 'package:inclusive_hue/pages/camera_tool_page.dart';
 import 'package:inclusive_hue/pages/notification_page.dart';
 import 'package:inclusive_hue/pages/profile_page.dart';
+import 'package:inclusive_hue/pages/plan_page.dart';
+import 'package:inclusive_hue/pages/register_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
