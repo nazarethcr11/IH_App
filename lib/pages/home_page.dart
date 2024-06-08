@@ -3,6 +3,8 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:inclusive_hue/pages/camera_tool_page.dart';
 import 'package:inclusive_hue/pages/notification_page.dart';
 import 'package:inclusive_hue/pages/profile_page.dart';
+import 'package:inclusive_hue/pages/plan_page.dart';
+import 'package:inclusive_hue/pages/register_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
