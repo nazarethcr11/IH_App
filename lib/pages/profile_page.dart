@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_list_tile.dart';
 import 'package:inclusive_hue/pages/change_colorblindtype_page.dart';
+import 'package:inclusive_hue/pages/plan_page.dart';
 import 'package:inclusive_hue/pages/theme_page.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -97,7 +98,9 @@ class ProfilePage extends StatelessWidget {
             MyListTile(
                 icon_leading: Icons.subscriptions,
                 title: 'Planes',
-                onTap: (){},
+                onTap: (){
+                  Navigator.push(context,MaterialPageRoute(builder:(context)=> PlanPage(),));
+                },
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
             MyListTile(
