@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_button.dart';
 import 'package:inclusive_hue/components/my_textfield.dart';
+import 'package:inclusive_hue/pages/home_page.dart';
 import 'package:inclusive_hue/pages/register_page.dart';
+import 'package:inclusive_hue/models/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +15,34 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  Future<void> _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final email = emailController.text;
+    final password = passwordController.text;
+
+    final result = await AuthService.login(email, password);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (result['status'] == 'success') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      // Manejar error de login
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login Failed: ${result['error']}')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +51,6 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            //image logo
             Image.asset(
               'lib/images/logotype/logo.png',
               width: 120,
@@ -37,9 +66,9 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 10),
             Padding(
-              padding:  EdgeInsets.symmetric(horizontal: 30),
+              padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
-                'Ingresa a tu cuenta para  acceder a nuestras herramientas',
+                'Ingresa a tu cuenta para acceder a nuestras herramientas',
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(context).colorScheme.tertiary,
@@ -62,13 +91,12 @@ class _LoginPageState extends State<LoginPage> {
               obscureText: true,
             ),
             SizedBox(height: 20),
-            MyButton(
-                onTap: () {
-
-                },
-                text: 'LOGIN',
+            _isLoading
+                ? CircularProgressIndicator()
+                : MyButton(
+              onTap: _login,
+              text: 'LOGIN',
             ),
-            //no tienes cuenta? Registrate
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,7 +110,10 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterPage()));
                   },
                   child: Text(
                     ' Registrate',
@@ -95,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ],
             )
-          ]
+          ],
         ),
       ),
     );

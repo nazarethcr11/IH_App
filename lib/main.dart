@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/models/color_transformation.dart';
 import 'package:inclusive_hue/pages/home_page.dart';
+import 'package:inclusive_hue/pages/login_page.dart';
 import 'package:inclusive_hue/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           colorFilter: colorFilterProvider.colorFilter,
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: HomePage(),
+            home: LoginPage(),
             theme: Provider.of<ThemeProvider>(context).themeData,
           ),
         );

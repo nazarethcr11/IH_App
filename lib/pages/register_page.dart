@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_button.dart';
 import 'package:inclusive_hue/components/my_textfield.dart';
@@ -14,6 +16,44 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
+
+  Future<void> _register() async {
+    final email = emailController.text;
+    final password = passwordController.text;
+    final confirmPassword = passwordController.text;
+
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Las contraseñas no coinciden')),
+      );
+      return;
+    }
+
+    final url = Uri.parse('http://192.168.18.34:8000/register'); // Cambia la URL de registro según sea necesario
+
+    final response = await http.post(
+      url,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: json.encode({
+        'email': email,
+        'password': password,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      final responseData = json.decode(response.body);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error al registrar: ${json.decode(response.body)['error']}')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
             const SizedBox(height: 20),
             //register button
             MyButton(
-                onTap: () { },
+                onTap: _register,
                 text: 'Registrarse'
             ),
             const SizedBox(height: 20),
