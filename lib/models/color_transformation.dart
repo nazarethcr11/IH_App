@@ -63,6 +63,12 @@ List<List<double>> getMatrixForSeverity(String type, double severity) {
       [0.0, 0.433, 0.567],
       [0.0, 0.475, 0.525]
     ];
+  } else if (type == 'MONOCHROMACY') {
+    matrix = [
+      [0.299, 0.587, 0.114],
+      [0.299, 0.587, 0.114],
+      [0.299, 0.587, 0.114]
+    ];
   }
 
   for (int i = 0; i < 3; i++) {
@@ -98,6 +104,12 @@ List<List<double>> getAdjustmentMatrix(String type, double adjustment) {
       [1.0, 0.0, adjustment],
       [0.0, 1.0, 0.0],
       [adjustment, 0.0, 1.0 - adjustment],
+    ];
+  } else if (type == 'MONOCHROMACY') {
+    adjustmentMatrix = [
+      [1.0 - adjustment, adjustment, adjustment],
+      [adjustment, 1.0 - adjustment, adjustment],
+      [adjustment, adjustment, 1.0 - adjustment]
     ];
   }
 

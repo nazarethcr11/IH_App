@@ -4,6 +4,8 @@ import 'package:inclusive_hue/pages/home_page.dart';
 import 'package:inclusive_hue/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
+import 'pages/login_page.dart';
+
 void main() {
   runApp(
     MultiProvider(
@@ -58,5 +60,3 @@ class ColorFilterProvider extends ChangeNotifier {
     }
   }
 }
-
-

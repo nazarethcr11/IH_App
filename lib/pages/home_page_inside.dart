@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_slider.dart';
+import 'package:flutter_overlay_window/flutter_overlay_window.dart';
 import 'package:provider/provider.dart';
 import '../components/my_toggle_button.dart';
 import '../main.dart';
@@ -17,9 +18,6 @@ class _HomePageInsideState extends State<HomePageInside> {
     final colorFilterProvider = Provider.of<ColorFilterProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Color Adjustment App"),
-      ),
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,13 +27,27 @@ class _HomePageInsideState extends State<HomePageInside> {
               leftLabel: 'Apagado',
               rightLabel: 'Encendido',
               isToggled: colorFilterProvider.isToggled,
-              onChanged: (value) {
+              onChanged: (value) async {
                 colorFilterProvider.updateColorFilter(
                   toggled: value,
                   adjustment: colorFilterProvider.colorAdjustment,
                   severityValue: colorFilterProvider.severity,
                   type: colorFilterProvider.colorType,
                 );
+                if (value) {
+                  if (!await FlutterOverlayWindow.isPermissionGranted()) {
+                    await FlutterOverlayWindow.requestPermission();
+                  }
+                  FlutterOverlayWindow.showOverlay(
+                    alignment: OverlayAlignment.center,
+                    height: 300,
+                    width: 300,
+                    overlayContent: 'ColorFilter:${colorFilterProvider
+                        .colorType}:${colorFilterProvider.severity}',
+                  );
+                } else {
+                  FlutterOverlayWindow.closeOverlay();
+                }
               },
             ),
             SizedBox(height: 20),
@@ -76,7 +88,7 @@ class _HomePageInsideState extends State<HomePageInside> {
                   type: newValue!,
                 );
               },
-              items: <String>['PROTANOMALY', 'DEUTERANOMALY', 'TRITANOMALY']
+              items: <String>['PROTANOMALY', 'DEUTERANOMALY', 'TRITANOMALY', 'MONOCHROMACY']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
@@ -101,7 +113,10 @@ class _HomePageInsideState extends State<HomePageInside> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.remove_red_eye_outlined, color: Theme.of(context).colorScheme.primary),
+                Icon(Icons.remove_red_eye_outlined, color: Theme
+                    .of(context)
+                    .colorScheme
+                    .primary),
                 SizedBox(width: 5),
                 Text('Vista previa'),
               ],
@@ -111,5 +126,5 @@ class _HomePageInsideState extends State<HomePageInside> {
       ),
     );
   }
-}
 
+}

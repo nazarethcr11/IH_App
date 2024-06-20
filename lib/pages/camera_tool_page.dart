@@ -11,7 +11,7 @@ class _CameraToolPageState extends State<CameraToolPage> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: const Text('Camera Tool Page'),
+      child: const Text('Not camera found.'),
     );
   }
 }
