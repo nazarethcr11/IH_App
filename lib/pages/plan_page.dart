@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_button.dart';
-import 'package:inclusive_hue/components/my_button.dart';
 
 class PlanPage extends StatelessWidget {
   const PlanPage({Key? key}) : super(key: key);

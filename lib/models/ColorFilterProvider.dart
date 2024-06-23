@@ -23,3 +23,4 @@ class ColorFilterProvider extends ChangeNotifier {
     }
   }
 }
+

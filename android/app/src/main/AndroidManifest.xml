@@ -13,9 +13,6 @@
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
-        <service android:name="flutter.overlay.window.flutter_overlay_window.OverlayService" android:exported="false" />
-        <service android:name=".OverlayService"
-            android:permission="android.permission.SYSTEM_ALERT_WINDOW"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
