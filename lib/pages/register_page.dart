@@ -36,24 +36,34 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
-    final result = await AuthService.register(email, password);
+    try {
+      final result = await AuthService.register(email, password);
 
-    setState(() {
-      _isLoading = false;
-    });
+      setState(() {
+        _isLoading = false;
+      });
 
-    if (result['status'] == 'success') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    } else {
-      // Manejar error de registro
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Registro Fallido: ${result['error']}')),
-      );
+      if (result['status'] == 'success') {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      } else {
+        print('Error: ${result['error']}');
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Registro Fallido: ${result['error']}')),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+        });
+        print('Exception: $e');
+        ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Ocurrió un error. Inténtalo de nuevo.')),
+        );
+      }
     }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
               'lib/images/logotype/logo.png',
               width: 120,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 4),
             Text(
               'Inclusive Hue',
               style: TextStyle(
@@ -77,7 +87,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 color: Theme.of(context).colorScheme.primary,
               ),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 5),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 30),
               child: Text(
@@ -89,7 +99,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 10),
             //email textfield
             MyTextField(
                 controller: emailController,
@@ -97,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: false,
                 icon: Icons.email
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 17),
             //password textfield
             MyTextField(
                 controller: passwordController,
@@ -105,7 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 obscureText: true,
                 icon: Icons.lock
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 17),
             //confirm password textfield
             MyTextField(
                 controller: confirmPasswordController,

@@ -110,29 +110,39 @@ class AuthService {
   static Future<Map<String, dynamic>> register(String email, String password) async {
     final url = Uri.parse('$baseUrl/register');
 
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: json.encode({
-        'email': email,
-        'password': password,
-      }),
-    );
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          'email': email,
+          'password': password,
+        }),
+      );
 
-    if (response.statusCode == 201) {
-      final responseData = json.decode(response.body);
-      return {
-        'status': 'success',
-        'user': responseData['user'],
-        'access': responseData['access'],
-        'refresh': responseData['refresh'],
-      };
-    } else {
+      if (response.statusCode == 201) {
+        final responseData = json.decode(response.body);
+        return {
+          'status': 'success',
+          'user': responseData['user'],
+          'access': responseData['token']['access'],
+          'refresh': responseData['token']['refresh'],
+        };
+      } else {
+        final errorData = json.decode(response.body);
+        print('Register API call failed: $errorData');
+        return {
+          'status': 'error',
+          'error': errorData['message'] ?? 'Error desconocido',
+        };
+      }
+    } catch (e) {
+      print('Register API call encountered an exception: $e');
       return {
         'status': 'error',
-        'error': json.decode(response.body)['error'],
+        'error': 'An error occurred during registration. Please try again.',
       };
     }
   }
