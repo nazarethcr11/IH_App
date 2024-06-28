@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_button.dart';
 import 'package:inclusive_hue/components/my_textfield.dart';
 import 'package:inclusive_hue/pages/register_page.dart';
+import 'package:inclusive_hue/services/auth/auth_service.dart';
+
+import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -11,8 +14,35 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
+
+  void _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final loginResult = await AuthService.login(
+      _emailController.text,
+      _passwordController.text,
+    );
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (loginResult['status'] == 'success') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => HomePage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Login failed. Please try again.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +79,23 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 30),
             MyTextField(
-              controller: emailController,
+              controller: _emailController,
               hintText: 'Email',
               icon: Icons.email,
               obscureText: false,
             ),
             SizedBox(height: 20),
             MyTextField(
-              controller: passwordController,
+              controller: _passwordController,
               hintText: 'Password',
               icon: Icons.lock,
               obscureText: true,
             ),
             SizedBox(height: 20),
+            _isLoading
+                ? CircularProgressIndicator():
             MyButton(
-                onTap: () {
-
-                },
+                onTap: _login,
                 text: 'LOGIN',
             ),
             //no tienes cuenta? Registrate

@@ -1,11 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:inclusive_hue/components/my_list_tile.dart';
 import 'package:inclusive_hue/pages/change_colorblindtype_page.dart';
+import 'package:inclusive_hue/pages/login_page.dart';
 import 'package:inclusive_hue/pages/plan_page.dart';
 import 'package:inclusive_hue/pages/theme_page.dart';
+import 'package:inclusive_hue/services/auth/auth_service.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool _isLoggingOut = false;
+
+  void _logout() async {
+    setState(() {
+      _isLoggingOut = true;
+    });
+
+    final logoutResult = await AuthService.logout();
+
+    setState(() {
+      _isLoggingOut = false;
+    });
+
+    if (logoutResult['status'] == 'success') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => LoginPage()),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Logout failed. Please try again.')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,12 +135,13 @@ class ProfilePage extends StatelessWidget {
                 },
                 iconColor: Theme.of(context).colorScheme.primary,
             ),
-            MyListTile(
+            _isLoggingOut
+                ? CircularProgressIndicator()
+            :MyListTile(
                 icon_leading: Icons.logout,
                 title: 'Cerrar Sesión',
                 onTap: (){
-                  //por ahora solo cierra la página
-                  Navigator.pop(context);
+                  _logout();
                 },
                 iconColor: Colors.red,
             ),

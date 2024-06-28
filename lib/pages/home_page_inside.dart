@@ -17,7 +17,7 @@ class _HomePageInsideState extends State<HomePageInside> {
     final colorFilterProvider = Provider.of<ColorFilterProvider>(context);
 
     return Scaffold(
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
       body: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +74,7 @@ class _HomePageInsideState extends State<HomePageInside> {
                   type: newValue!,
                 );
               },
-              items: <String>['PROTANOMALY', 'DEUTERANOMALY', 'TRITANOMALY']
+              items: <String>['PROTANOMALY', 'DEUTERANOMALY', 'TRITANOMALY', 'MONOCHROMACY']
                   .map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
