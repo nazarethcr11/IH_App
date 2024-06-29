@@ -5,6 +5,8 @@ import 'package:inclusive_hue/services/other/upload_img_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart'; // Importar provider
+import '../models/ColorFilterProvider.dart'; // Asegúrate de importar correctamente
 
 class RecolorImage extends StatefulWidget {
   const RecolorImage({Key? key}) : super(key: key);
@@ -18,6 +20,25 @@ class _RecolorImageState extends State<RecolorImage> {
   String? _processedImageUrl; // Para almacenar la URL de la imagen procesada
   final picker = ImagePicker();
   bool _isUploading = false;
+  String type = '';
+  String subtype = '';
+
+  //asignar type and subtype segun el colorFilterProvider
+  void assignTypeAndSubtype(ColorFilterProvider colorFilterProvider) {
+    if (colorFilterProvider.colorType == 'PROTANOMALY') {
+      type = 'anomalous_trichromatic';
+      subtype = 'protanomalous';
+    } else if (colorFilterProvider.colorType == 'DEUTERANOMALY') {
+      type = 'anomalous_trichromatic';
+      subtype = 'deuteranomalous';
+    } else if (colorFilterProvider.colorType == 'TRITANOMALY') {
+      type = 'anomalous_trichromatic';
+      subtype = 'tritanomalous';
+    } else if (colorFilterProvider.colorType == 'MONOCHROMACY') {
+      type = 'achromatic';
+      subtype = 'achromatic';
+    }
+  }
 
   Future<void> _pickImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -32,18 +53,19 @@ class _RecolorImageState extends State<RecolorImage> {
     });
   }
 
-  Future<void> _uploadImage() async {
+  Future<void> _uploadImage(ColorFilterProvider colorFilterProvider) async {
     if (_image == null) return;
 
     setState(() {
       _isUploading = true;
     });
-
+    assignTypeAndSubtype(colorFilterProvider);
     final result = await ImageUploadService.uploadImage(
       _image!,
-      'anomalous_trichromatic', // Cambia esto según sea necesario
-      'deuteranomalous', // Cambia esto según sea necesario
+      type,
+      subtype,
     );
+
 
     setState(() {
       _isUploading = false;
@@ -95,6 +117,8 @@ class _RecolorImageState extends State<RecolorImage> {
 
   @override
   Widget build(BuildContext context) {
+    final colorFilterProvider = Provider.of<ColorFilterProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Recolorar Imagen'),
@@ -117,7 +141,7 @@ class _RecolorImageState extends State<RecolorImage> {
             _image == null || _processedImageUrl != null || _isUploading
                 ? SizedBox.shrink()
                 : ElevatedButton(
-              onPressed: _uploadImage,
+              onPressed: () => _uploadImage(colorFilterProvider),
               child: Text('Upload Image'),
             ),
             _processedImageUrl != null

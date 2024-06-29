@@ -1,22 +1,23 @@
-
 class User {
-  String nombre;
-  String correo;
-  final TypeColorBlind typeColorBlind;
+  final String email;
+  final String password;
 
-  User({
-    required this.nombre,
-    required this.correo,
-    required this.typeColorBlind,
-  });
-}
+  User({required this.email, required this.password});
 
-enum TypeColorBlind {
-  monochromatic,
-  dichro_prota,
-  dichro_deuta,
-  dichro_trita,
-  trichro_prota,
-  trichro_deuta,
-  trichro_trita
+  // Método para crear un usuario a partir de un mapa (por ejemplo, JSON)
+  factory User.fromJson(Map<String, dynamic> json) {
+    return User(
+      email: json['email'],
+      password: json['password'],
+      // Inicializar otros campos
+    );
+  }
+
+  // Método para convertir el usuario a un mapa (por ejemplo, para guardar en SharedPreferences)
+  Map<String, dynamic> toJson() {
+    return {
+      'email': email,
+      // Convertir otros campos
+    };
+  }
 }

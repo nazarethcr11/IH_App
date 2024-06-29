@@ -14,6 +14,8 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  //obtener el correo del usuario actual
+
   bool _isLoggingOut = false;
 
   void _logout() async {
@@ -93,7 +95,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                     SizedBox(height: 15),
                     Text(
-                      'Nombre de Usuario',
+                      'Usuario',
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     Text(

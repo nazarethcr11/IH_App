@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:inclusive_hue/models/ColorFilterProvider.dart';
 import 'package:inclusive_hue/pages/login_page.dart';
 import 'package:inclusive_hue/themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-import 'models/ColorFilterProvider.dart';
 
 void main() {
   runApp(

@@ -63,7 +63,6 @@ class _HomePageInsideState extends State<HomePageInside> {
               },
             ),
             SizedBox(height: 20),
-            // Dropdown to select color type
             DropdownButton<String>(
               value: colorFilterProvider.colorType,
               onChanged: (String? newValue) {
@@ -83,7 +82,6 @@ class _HomePageInsideState extends State<HomePageInside> {
               }).toList(),
             ),
             SizedBox(height: 20),
-            // Preview image with color adjustment
             Container(
               width: 200,
               height: 200,

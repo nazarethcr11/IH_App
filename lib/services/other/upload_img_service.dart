@@ -17,12 +17,16 @@ class ImageUploadService {
       };
     }
 
-    final url = Uri.parse('$baseUrl/upload/'); // Añadir la barra final aquí
+    final url = Uri.parse('$baseUrl/upload/');  // Añadir la barra final aquí
+    //for monochromatic no need for subtype
     final request = http.MultipartRequest('POST', url)
       ..headers['Authorization'] = 'Bearer $accessToken'
       ..fields['type'] = type
       ..fields['subtype'] = subtype
       ..files.add(await http.MultipartFile.fromPath('image', imageFile.path));
+    if (type == 'achromatic') {
+      request.fields.remove('subtype');
+    }
 
     try {
       final response = await request.send();
@@ -46,4 +50,5 @@ class ImageUploadService {
       };
     }
   }
+
 }
